@@ -1,5 +1,8 @@
 # React TODO APP
 
-Stack - 
+**Stack:**
 
-- React
+- ReactJS (useState, useReducer, useEffect)
+- React Router
+- Axios
+- classnames
