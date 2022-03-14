@@ -1,17 +1,64 @@
+import axios from 'axios';
 import React from 'react';
 
-const List = ({ onClick, items, name }) => {
+import removeSvg from '../../assets/img/remove.svg';
 
-    console.log(items)
+import Badge from '../Badge/Badge';
+
+import './List.scss'
+
+
+const List = ({
+    items,
+    activeItem,
+    colors,
+    isRemovable,
+    onClick,
+    onRemove,
+    getColor
+}) => {
+
+
+
+
+
+    const removeList = item => {
+        if (window.confirm('Вы действительно хотите удалить список?')) {
+            axios
+                .delete('http://localhost:3001/lists/' + item.id)
+                .then(() => {
+                    onRemove(item.id);
+                });
+        }
+    };
 
     return (
         <ul className='todo__list'>
-            {items.map((item, index) => {
+            {items.map(item => {
                 return <li
-                    key={`${item.name}__${index}`}
-                    onClick={() => onClick(item)}
+                    key={item.name}
+                    className={(activeItem && item.id === activeItem.id) ? 'active' : ''}
                 >
-                    {item.name}
+                    {item.icon
+                        ? item.icon
+                        : <Badge
+                            color={getColor(item)}
+
+                        />
+                    }
+                    <span
+                        onClick={() => onClick(item)}
+                    >
+                        {item.name}
+                    </span>
+                    {isRemovable && (
+                        <img
+                            className="remove-icon"
+                            src={removeSvg}
+                            alt=""
+                            onClick={() => removeList(item)}
+                        />
+                    )}
                 </li>
             })}
         </ul>

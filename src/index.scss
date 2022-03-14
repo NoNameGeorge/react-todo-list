@@ -1,10 +1,16 @@
 * {
-    font-family: -apple-system, system-ui, 'sans-serif';
+    font-family: -apple-system, system-ui, "sans-serif";
     box-sizing: border-box;
     outline: none;
     margin: 0;
     padding: 0;
     list-style: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -23,32 +29,27 @@ body {
 .todo-wrapper {
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 5vh 20px;
+    width: 100%;
 }
 
 .todo {
     display: grid;
-    height: 90vh;
+    width: 100%;
+    max-width: 980px;
+    min-height: 90vh;
     margin: 0 auto;
     border-radius: 8px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     grid-template-columns: minmax(200px, 250px) minmax(500px, 1fr);
     &__sidebar {
-        background: #F4F6F8;
+        background: #f4f6f8;
         padding: 58px 10px 20px 30px;
-        border-right: 1px solid #F1F1F1;
+        border-right: 1px solid #f1f1f1;
     }
     &__main {
-
-    }
-}
-
-.sidebar {
-    &__item {
-
-    }
-    &__title {
-
+        padding: 60px;
     }
 }
