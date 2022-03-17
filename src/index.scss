@@ -46,10 +46,38 @@ body {
     grid-template-columns: minmax(200px, 250px) minmax(500px, 1fr);
     &__sidebar {
         background: #f4f6f8;
-        padding: 58px 10px 20px 30px;
+        padding: 60px 25px;
         border-right: 1px solid #f1f1f1;
     }
     &__main {
         padding: 60px;
     }
 }
+
+.field {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 9px 10px 11px;
+    line-height: 1;
+    border-radius: 4px;
+    border: 0;
+}
+
+.button {
+    width: 100%;
+    background: #4dd599;
+    border-radius: 4px;
+    color: #fff;
+    border: 0;
+    padding: 9px 10px 11px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    transition: ease 0.5s;
+    &:hover {
+        background: darken(#4dd599, 10%);
+        transition: ease 0.5s;
+    }
+}
+ 

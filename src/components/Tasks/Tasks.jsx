@@ -17,10 +17,11 @@ const Tasks = ({
     onEditListTitle,
     getColor
 }) => {
+    const [inputValue, setInputValue] = React.useState('');
+
 
     const editTask = (item) => {
         const newTitle = prompt('Введите новый заголовок')
-
         if (!newTitle || item.name === newTitle) return
 
         onEditListTitle(item.id, newTitle)
@@ -37,6 +38,31 @@ const Tasks = ({
     const taskItems = tasks && tasks.filter(task => {
         if (task.listId === item.id) return task
     })
+    
+    const addTask = () => {
+        if (!inputValue) {
+            alert('Введите название задачи');
+            return;
+        }
+
+        const task = {
+            "listId": item.id,
+            "text": inputValue,
+            "completed": false
+        }
+
+        onAddTask(task)
+
+        axios
+            .post(`http://localhost:3001/tasks`, task)
+            .catch(() => {
+                alert('Ошибка при добавлении задачи!');
+            })
+            .finally(() => {
+                setInputValue('')
+            })
+
+    }
 
     return (
         <div className='tasks'>
@@ -54,7 +80,7 @@ const Tasks = ({
                     />
                 </h2>
             </Link>
-                
+
 
             <div className="tasks__items">
                 {taskItems && taskItems.length
@@ -73,6 +99,19 @@ const Tasks = ({
                     })
                     : <h2>Задачи отсутствуют</h2>
                 }
+            </div>
+
+            <div className="add-tasks">
+
+                <input
+                    className="field"
+                    type="text"
+                    placeholder="Введите название задачи..."
+                    value={inputValue}
+                    onChange={e => setInputValue(e.target.value)}
+                />
+
+                <button onClick={addTask} className="button">Добавить</button>
             </div>
         </div>
     );
