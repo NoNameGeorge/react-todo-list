@@ -20,7 +20,7 @@ function App() {
 
   React.useEffect(() => {
     axios
-      .get('http://localhost:3001/lists')
+      .get('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/lists')
       .then(({ data }) => {
         setLists(data)
       })
@@ -28,7 +28,7 @@ function App() {
 
   React.useEffect(() => {
     axios
-      .get('http://localhost:3001/tasks')
+      .get('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/tasks')
       .then(({ data }) => {
         setTasks(data)
       })
@@ -36,7 +36,7 @@ function App() {
 
   React.useEffect(() => {
     axios
-      .get('http://localhost:3001/colors').then(({ data }) => {
+      .get('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/colors').then(({ data }) => {
         setColors(data)
       })
   }, [])
@@ -67,7 +67,7 @@ function App() {
     setTasks(newTasks)
 
     axios
-      .patch('http://localhost:3001/tasks/' + taskObj.id, {
+      .patch('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/tasks/' + taskObj.id, {
         text: newTitle
       })
       .catch(() => {
@@ -77,16 +77,12 @@ function App() {
 
   const onRemoveTask = (listId, taskId) => {
     if (window.confirm('Вы действительно хотите удалить пункт списка?')) {
-      const newTasks = tasks.filter(task => {
-        if (task.id !== taskId || task.listId !== listId) {
-          return task
-        }
-      })
+      const newTasks = tasks.filter(task => task.id !== taskId || task.listId !== listId)
 
       setTasks(newTasks)
 
       axios
-        .delete('http://localhost:3001/tasks/' + taskId)
+        .delete('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/tasks/' + taskId)
         .catch(() => {
           alert('Не удалось обновить задачу')
         })
@@ -104,7 +100,7 @@ function App() {
     setTasks(newTasks)
 
     axios
-      .patch('http://localhost:3001/tasks/' + taskId, {
+      .patch('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/tasks/' + taskId, {
         completed
       })
       .catch(() => {
@@ -150,9 +146,7 @@ function App() {
   let currentItem
 
   if (lists && activeItem) {
-    currentItem = lists.filter(item => {
-      if (item.id === activeItem.id) return item
-    })[0]
+    currentItem = lists.filter(item => (item.id === activeItem.id))[0]
   }
 
   if (!colors || !lists || !tasks) return <></>

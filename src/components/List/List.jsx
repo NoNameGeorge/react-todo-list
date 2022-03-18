@@ -25,7 +25,7 @@ const List = ({
     const removeList = item => {
         if (window.confirm('Вы действительно хотите удалить список?')) {
             axios
-                .delete('http://localhost:3001/lists/' + item.id)
+                .delete('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/lists/' + item.id)
                 .then(() => {
                     onRemove(item.id);
                 });

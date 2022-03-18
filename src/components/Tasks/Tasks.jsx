@@ -27,7 +27,7 @@ const Tasks = ({
         onEditListTitle(item.id, newTitle)
 
         axios
-            .patch('http://localhost:3001/lists/' + item.id, {
+            .patch('https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/lists/' + item.id, {
                 name: newTitle
             })
             .catch(() => {
@@ -35,9 +35,7 @@ const Tasks = ({
             });
     }
 
-    const taskItems = tasks && tasks.filter(task => {
-        if (task.listId === item.id) return task
-    })
+    const taskItems = tasks && tasks.filter(task => task.listId === item.id)
     
     const addTask = () => {
         if (!inputValue) {
@@ -54,7 +52,7 @@ const Tasks = ({
         onAddTask(task)
 
         axios
-            .post(`http://localhost:3001/tasks`, task)
+            .post(`https://my-json-server.typicode.com/NoNameGeorge/react-todo-list-JSON/tasks`, task)
             .catch(() => {
                 alert('Ошибка при добавлении задачи!');
             })
